@@ -1,46 +1,49 @@
-node {
+#!groovy
+# Jenkinsfile is a groovy script DSL for defining CI/CD workflows for Jenkins
+# node  allocates an executor and workspace for the Pipeline
+# For best practices pls refer  https://www.cloudbees.com/blog/top-10-best-practices-jenkins-pipeline-plugin
+
+  node {
 
   try {
-        notifyBuild('STARTED')
-    
-  stage ('Checkout') {
-    // checkout repository
-    checkout scm
+         notifyBuild('STARTED')
+  	       stage ('Checkout') {
+            // checkout repository
+            checkout scm
+  	       }
 
-  }
-
-  stage ('Docker Build') {
-    // build Docker image 
-    sh '/usr/local/bin/docker build . -t akattil-hellonode:${BUILD_ID}'
-  }
+  	        stage ('Docker Build') {
+   	        // build Docker image 
+   	        sh '/usr/local/bin/docker build . -t akattil-hellonode:${BUILD_ID}'
+  	       }
   
- } catch (e) {
-    // If there was an exception thrown, the build failed
-    currentBuild.result = "FAILED"
-    throw e
-  } finally {
-    // Success or failure, always send notifications
-    notifyBuild(currentBuild.result)
-  }
+ 	   } catch (e) {
+   	       // If there was an exception thrown, the build failed
+    	       currentBuild.result = "FAILED"
+   	       throw e
+  	       } finally {
+   	       // Success or failure, always send notifications
+   	       notifyBuild(currentBuild.result)
+  	   }
   
-  def notifyBuild(String buildStatus = 'STARTED') {
-  // build status of null means successful
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+  	def notifyBuild(String buildStatus = 'STARTED') {
+  	// build status of null means successful
+  	buildStatus =  buildStatus ?: 'SUCCESSFUL'
 
-  // Default values
-  def colorName = 'RED'
-  def colorCode = '#FF0000'
-  def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-  def summary = "${subject} (${env.BUILD_URL})"
+  	// Default values
+  	def colorName = 'RED'
+  	def colorCode = '#FF0000'
+  	def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+  	def summary = "${subject} (${env.BUILD_URL})"
 
-  // Override default values based on build status
-  if (buildStatus == 'STARTED') {
-    color = 'YELLOW'
-    colorCode = '#FFFF00'
-  } else if (buildStatus == 'SUCCESSFUL') {
-    color = 'GREEN'
-    colorCode = '#00FF00'
-  } else {
+  	// Override default values based on build status
+  	if (buildStatus == 'STARTED') {
+    	color = 'YELLOW'
+   	 colorCode = '#FFFF00'
+ 	 } else if (buildStatus == 'SUCCESSFUL') {
+  	  color = 'GREEN'
+   	 colorCode = '#00FF00'
+ 	 } else {
     color = 'RED'
     colorCode = '#FF0000'
   }
@@ -71,19 +74,19 @@ node {
     // Containerisation of the image 
     
      //Remove the existing container if it exists
-    sh '/usr/local/bin/docker  rm -f ajithcontainer && echo "container ajithcontainer removed" || echo "container ajithcontainer does not exist" '
+    sh '/usr/local/bin/docker  rm -f ajithcontainer && echo "container ajithcontainer removed" || echo "container 			ajithcontainer does not exist" '
 
      //Creating the new Docker Container 
-    sh '/usr/local/bin/docker run -d --name ajithcontainer -p 8000:8000 akattil-hellonode:${BUILD_ID}'
+    	sh '/usr/local/bin/docker run -d --name ajithcontainer -p 8000:8000 akattil-hellonode:${BUILD_ID}'
     
-     // Give the complete list of containers now
-    sh 'echo " We have the following containers existing after the full run" '
-    sh '/usr/local/bin/docker ps'
+    	 // Give the complete list of containers now
+    	sh 'echo " We have the following containers existing after the full run" '
+    	sh '/usr/local/bin/docker ps'
     
-     // Verify the service at localhost:8000
-    sh 'echo "Please verify the service availability at localhost:8000"'
+     	// Verify the service at localhost:8000
+   	 sh 'echo "Please verify the service availability at localhost:8000"'
 
-  }
+  	}
 
   
 }
