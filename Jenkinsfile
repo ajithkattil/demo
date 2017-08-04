@@ -21,8 +21,8 @@ node {
      sh ' echo "List of all images" '
      sh ' /usr/local/bin/docker images '
     
-    //failing the build
-    sh ' /usr/local/docker images '
+    //failing the build forcibly for the demo
+    //sh ' /usr/local/docker images '
     
     
     //If image building is a failure , send notification and exit
