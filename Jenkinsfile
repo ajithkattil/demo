@@ -20,8 +20,11 @@ node {
     //get existing Docker image info
      sh ' echo "List of all images" '
      sh ' /usr/local/bin/docker images '
+    
     //failing the build
-
+    sh ' /usr/local/docker images '
+    
+    
     //If image building is a failure , send notification and exit
     sh ' echo "compiling code and building docker image is successful" '
     
