@@ -9,6 +9,7 @@ node {
 
   stage ('Docker Build') {
     // build Docker image 
+    sh ' echo "build , package , and ultimately creating Docker image"'
     sh '/usr/local/bin/docker build . -t akattil-hellonode:${BUILD_ID}'
  
   
@@ -30,7 +31,7 @@ node {
 
    stage ('Deploy') {
     // Containerisation of the image 
-    
+    sh ' echo "Deploying the image , ie running to create a Docker container of the image"'
      //Remove the existing container if it exists
     sh '/usr/local/bin/docker  rm -f ajithcontainer && echo "container ajithcontainer removed" || echo "container ajithcontainer does not exist" '
 
