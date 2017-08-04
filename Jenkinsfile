@@ -9,20 +9,18 @@ node {
   stage ('Docker Build') {
     // build Docker image 
     sh '/usr/local/bin/docker build . -t akattil-hellonode:${BUILD_ID}'
-  }
+ 
   
-  stage ('Docker all image info') {
+  
     //get existing Docker image info
-  sh ' echo "List of all images" '
-  sh ' /usr/local/bin/docker images '
-    }
-  
-  stage ('build status notification/exit') {
+     sh ' echo "List of all images" '
+     sh ' /usr/local/bin/docker images '
+    
+
     //If image building is a failure , send notification and exit
-  sh ' echo "compiling code and building docker image is successful" '
-    }
-  
-  stage ('Docker all container info') {
+    sh ' echo "compiling code and building docker image is successful" '
+    
+
     // get existing Docker container info
     sh 'echo " We have the following containers existing now" '
     sh '/usr/local/bin/docker ps'
