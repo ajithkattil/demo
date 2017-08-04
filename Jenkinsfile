@@ -58,9 +58,7 @@ node {
      // Verify the service at localhost:8000
     sh 'echo "Please verify the service availability at localhost:8000"'
 
-   }
-
-  
+     }
    }
 
    def notifyBuild(String buildStatus = 'STARTED') {
