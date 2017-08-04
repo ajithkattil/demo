@@ -26,7 +26,12 @@
    	       notifyBuild(currentBuild.result)
   	   }
   
-  	def notifyBuild(String buildStatus = 'STARTED') {
+  	
+
+  // Send notifications
+  slackSend (color: colorCode, message: summary)
+}
+  def notifyBuild(String buildStatus = 'STARTED') {
   	// build status of null means successful
   	buildStatus =  buildStatus ?: 'SUCCESSFUL'
 
@@ -47,10 +52,6 @@
     color = 'RED'
     colorCode = '#FF0000'
   }
-
-  // Send notifications
-  slackSend (color: colorCode, message: summary)
-}
     
   stage ('Docker all image info') {
     //get existing Docker image info
