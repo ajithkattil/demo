@@ -52,24 +52,21 @@
     color = 'RED'
     colorCode = '#FF0000'
   }
-    
-  stage ('Docker all image info') {
+   
     //get existing Docker image info
   sh ' echo "List of all images" '
   sh ' /usr/local/bin/docker images '
-    }
+    
   
-  stage ('build status notification/exit') {
     //If image building is a failure , send notification and exit
   sh ' echo "compiling code and building docker image is successful" '
-    }
+    
   
-  stage ('Docker all container info') {
     // get existing Docker container info
     sh 'echo " We have the following containers existing now" '
     sh '/usr/local/bin/docker ps'
 
-  }
+  
 
    stage ('Deploy') {
     // Containerisation of the image 
