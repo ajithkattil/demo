@@ -72,7 +72,7 @@
     // Containerisation of the image 
     
      //Remove the existing container if it exists
-    sh '/usr/local/bin/docker  rm -f ajithcontainer && echo "container ajithcontainer removed" || echo "container 			ajithcontainer does not exist" '
+    sh '/usr/local/bin/docker  rm -f ajithcontainer && echo "container ajithcontainer removed" || echo "container ajithcontainer does not exist" '
 
      //Creating the new Docker Container 
     	sh '/usr/local/bin/docker run -d --name ajithcontainer -p 8000:8000 akattil-hellonode:${BUILD_ID}'
