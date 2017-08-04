@@ -12,7 +12,7 @@
             checkout scm
   	       }
 
-  	        stage ('Docker Build') {
+  	        stage ('Build') {
    	        // build Docker image 
    	        sh '/usr/local/bin/docker build . -t akattil-hellonode:${BUILD_ID}'
   	       }
