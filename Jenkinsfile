@@ -8,7 +8,6 @@ node {
     sh ' echo "Checking out the project from  from Github repository"'
     checkout scm
     }
-
      
    stage ('Docker Build') {
     // build Docker image 
