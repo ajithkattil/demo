@@ -1,6 +1,9 @@
 node {
-
-  stage ('Checkout') {
+  
+   try {
+        notifyBuild('STARTED')
+     
+   stage ('Checkout') {
     // checkout repository
     sh ' echo "Checking out the project from  from Github repository"'
     checkout scm
@@ -28,7 +31,18 @@ node {
     sh '/usr/local/bin/docker ps'
 
   }
-
+  
+   } catch (e) {
+    // If there was an exception thrown, the build failed
+    currentBuild.result = "FAILED"
+    throw e
+  } finally {
+    // Success or failure, always send notifications
+    notifyBuild(currentBuild.result)
+  }
+  
+  //End of try finally clause
+  
    stage ('Deploy') {
     // Containerisation of the image 
     sh ' echo "Deploying the image , ie running to create a Docker container of the image"'
