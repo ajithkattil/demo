@@ -1,7 +1,7 @@
 #!groovy
-# Jenkinsfile is a groovy script DSL for defining CI/CD workflows for Jenkins
-# node  allocates an executor and workspace for the Pipeline
-# For best practices pls refer  https://www.cloudbees.com/blog/top-10-best-practices-jenkins-pipeline-plugin
+//Jenkinsfile is a groovy script DSL for defining CI/CD workflows for Jenkins
+//node  allocates an executor and workspace for the Pipeline
+//For best practices pls refer  https://www.cloudbees.com/blog/top-10-best-practices-jenkins-pipeline-plugin
 
   node {
 
