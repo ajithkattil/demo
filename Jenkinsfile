@@ -48,6 +48,7 @@ node {
   
    stage ('Deploy') {
     // Containerisation of the image 
+    sh 'echo " PROMOTION DONE FROM BUILD STAGE TO DEPLOY STAGE, NOTIFICATION SEND TO SLACK CHANNEL"'
     sh ' echo "Deploying the image , ie running to create a Docker container of the image"'
      //Remove the existing container if it exists
     sh '/usr/local/bin/docker  rm -f ajithcontainer && echo "container ajithcontainer removed" || echo "container ajithcontainer does not exist" '
