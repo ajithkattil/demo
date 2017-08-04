@@ -9,6 +9,7 @@ node {
     checkout scm
     }
 
+     
    stage ('Docker Build') {
     // build Docker image 
     sh ' echo "build , package , and ultimately creating Docker image"'
