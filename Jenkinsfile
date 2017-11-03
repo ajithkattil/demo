@@ -87,7 +87,7 @@ node {
    }
 
    // Send notifications
-   slackSend (color: colorCode, message: summary)
+ //  slackSend (color: colorCode, message: summary)
 
    //emailext(
    //    subject: subject,
